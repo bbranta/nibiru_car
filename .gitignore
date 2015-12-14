@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/android,pycharm,python,android,vim
 
+.DS_Store
+
 ### Android ###
 # Built application files
 *.apk
