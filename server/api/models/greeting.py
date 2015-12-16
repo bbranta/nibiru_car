@@ -1,3 +1,4 @@
+# coding=utf-8
 from google.appengine.ext import ndb
 
 
@@ -8,4 +9,4 @@ class Greeting(ndb.Model):
 
     @classmethod
     def query_all(cls):
-        return cls.query().order(-cls.date)
+        return cls.query(ancestor=ancestor_key).order(-cls.date)
