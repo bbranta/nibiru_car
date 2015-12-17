@@ -42,8 +42,6 @@ public class NewCarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_car);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         editModel = (EditText) findViewById(R.id.editModel);
         editBrand = (EditText) findViewById(R.id.editBrand);
         editYear = (EditText) findViewById(R.id.editYear);
