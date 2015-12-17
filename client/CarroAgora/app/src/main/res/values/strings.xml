@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CarroAgora</string>
+    <string name="title_activity_new_car">NewCarActivity</string>
 </resources>
