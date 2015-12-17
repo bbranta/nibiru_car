@@ -1,5 +1,8 @@
 package com.motorola.carroagora;
 
+import android.util.Log;
+
+import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -8,9 +11,9 @@ import retrofit.Retrofit;
  * Created by rbresil on 12/17/15.
  */
 public class Test {
+    public String TAG = "TEST";
 
     public void main(String[] args) {
-
 
         Car car = new Car();
 
@@ -19,9 +22,10 @@ public class Test {
 
         CarInterface carInterface = CarServiceFactory.getCarService();
 
-        carInterface.newCar(car, new Callback<MessageResponse>() {
+        Call<Void> call = carInterface.newCar(car);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Response<MessageResponse> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 Log.d(TAG, "onResponse PASSOU");
             }
 
@@ -30,6 +34,5 @@ public class Test {
                 Log.e(TAG, "onFailure FALHOU");
             }
         });
-
     }
 }

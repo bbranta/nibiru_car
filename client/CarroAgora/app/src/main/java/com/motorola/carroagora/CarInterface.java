@@ -1,5 +1,6 @@
 package com.motorola.carroagora;
 
+import retrofit.Call;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.POST;
@@ -10,8 +11,5 @@ import retrofit.http.POST;
 public interface CarInterface {
 
     @POST("/api/v1/cars")
-    public void newCar (@Body Car car, Callback<MessageResponse> responseCallback);
-
-
-
+    public Call<Void> newCar (@Body Car car);
 }
