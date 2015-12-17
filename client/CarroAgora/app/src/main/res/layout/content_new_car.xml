@@ -105,14 +105,14 @@
             android:id="@+id/radioGroupFuel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkedButton="@+id/radioButton"
+            android:checkedButton="@+id/radioGasoline"
             android:layout_toEndOf="@id/textFuel"
             android:layout_below="@id/checkBoxTrioEletrico">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gasolina"
-                android:id="@+id/radioButton"
+                android:id="@+id/radioGasoline"
                 android:layout_below="@+id/checkBoxTrioEletrico"
                 android:layout_toEndOf="@+id/textFuel" />
 
@@ -120,16 +120,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Álcool"
-                android:id="@+id/radioButton2"
-                android:layout_below="@+id/radioButton"
-                android:layout_alignStart="@+id/radioButton" />
+                android:id="@+id/radioAlcohol"
+                android:layout_below="@+id/radioGasoline"
+                android:layout_alignStart="@+id/radioGasoline" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Flex"
-                android:id="@+id/radioButton3"
-                android:layout_below="@+id/radioButton2"
+                android:id="@+id/radioFlex"
+                android:layout_below="@+id/radioAlcohol"
                 android:layout_toEndOf="@+id/textFuel" />
         </RadioGroup>
 
