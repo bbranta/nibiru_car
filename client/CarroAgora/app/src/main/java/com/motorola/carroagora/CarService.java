@@ -1,10 +1,6 @@
 package com.motorola.carroagora;
 
-import com.squareup.okhttp.RequestBody;
-
 import retrofit.Call;
-import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
@@ -28,5 +24,7 @@ public interface CarService {
             @Field("optionals") int optionals,
             @Field("price") int price,
             @Field("fuel") String fuel,
-            @Field("available_time_range") String availableTimeRange);
+            @Field("available_date") String availableDate,
+            @Field("available_start_time") int availableStartTime,
+            @Field("available_end_time") int availableEndTime);
 }

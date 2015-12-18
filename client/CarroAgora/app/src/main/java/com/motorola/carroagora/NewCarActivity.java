@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -80,13 +81,13 @@ public class NewCarActivity extends AppCompatActivity {
                 }
                 int optionals = 0;
                 if (checkOptionalAirConditioner.isChecked()) {
-                    optionals &= Car.OPTIONAL_AIR_CONDITIONER;
+                    optionals |= Car.OPTIONAL_AIR_CONDITIONER;
                 }
                 if (checkOptionalDirecaoHidraulica.isChecked()) {
-                    optionals &= Car.OPTIONAL_DIRECAO_HIDRAULICA;
+                    optionals |= Car.OPTIONAL_DIRECAO_HIDRAULICA;
                 }
                 if (checkOptionalTrioEletrico.isChecked()) {
-                    optionals &= Car.OPTIONAL_TRIO_ELETRICO;
+                    optionals |= Car.OPTIONAL_TRIO_ELETRICO;
                 }
                 car.setOptionals(optionals);
 
@@ -124,17 +125,25 @@ public class NewCarActivity extends AppCompatActivity {
                         car.getOptionals(),
                         Math.round(100 * car.getPrice()),
                         car.getFuel().toString(),
-                        car.getAvailableDate() + "-" + car.getStartTime() + "-" + car.getEndTime()
+                        car.getAvailableDate(),
+                        car.getStartTime(),
+                        car.getEndTime()
                 );
                 call.enqueue(new Callback<MessageResponse>() {
                     @Override
                     public void onResponse(Response<MessageResponse> response, Retrofit retrofit) {
-                        Log.d(TAG, "aew");
+                        MessageResponse message = response.body();
+                        Toast.makeText(
+                                getApplicationContext(), message.getMessage(), Toast.LENGTH_LONG)
+                                .show();
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
-                        Log.e(TAG, "could not create new car", t);
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Deu ruim: " + t.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
             }

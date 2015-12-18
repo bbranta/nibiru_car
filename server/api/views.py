@@ -55,10 +55,12 @@ def add_car():
         c.brand = request.form.get('brand')
         c.model = request.form.get('model')
         c.year = int(request.form.get('year'))
-        c.optionals = request.form.get('optionals')
+        c.optionals = int(request.form.get('optionals'))
         c.price = int(request.form.get('price'))
         c.fuel = request.form.get('fuel')
-        c.available_time_range = request.form.get('available_time_range')
+        c.available_date = request.form.get('available_date')
+        c.available_start_time = int(request.form.get('available_start_time'))
+        c.available_end_time = int(request.form.get('available_end_time'))
         c.owner = u_key
         c_key = c.put()
 
@@ -69,7 +71,7 @@ def add_car():
         })
 
     except Exception, e:
-        logger.error("Error saving car %r", e)
+        logger.exception("Error saving car")
         return jsonify({
             'status': 'fail',
             'message': e.message,

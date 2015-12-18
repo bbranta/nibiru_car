@@ -2,8 +2,6 @@ package com.motorola.carroagora;
 
 import android.text.TextUtils;
 
-import java.util.Date;
-
 public class Car {
     private String brand;
     private String model;
