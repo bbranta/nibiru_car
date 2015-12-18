@@ -22,10 +22,12 @@ def add_dummy_car():
     c.brand = 'Mercedes'
     c.model = 'Classe ' + random.choice('ABCD')
     c.year = 2007
-    c.optionals = ['Ar Condicionado', 'Trio Elétrica']
+    c.optionals = 3
     c.price = 250
     c.fuel = 'Gasolina'
-    c.available_slots = ['8:00', '10:00', '11:00']
+    c.available_date = '2/2/2015'
+    c.available_start_time = 2
+    c.available_end_time = 4
     c.owner = u_key
     c_key = c.put()
     return jsonify({
@@ -80,5 +82,5 @@ def add_car():
 
 def list_cars():
     return jsonify({
-        'items': [c.to_dict() for c in Car.query()],
+        'items': [c.to_dict() for c in Car.query()]
     })

@@ -1,8 +1,11 @@
 package com.motorola.carroagora;
 
+import java.util.List;
+
 import retrofit.Call;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
+import retrofit.http.GET;
 import retrofit.http.POST;
 
 /**
@@ -27,4 +30,7 @@ public interface CarService {
             @Field("available_date") String availableDate,
             @Field("available_start_time") int availableStartTime,
             @Field("available_end_time") int availableEndTime);
+
+    @GET("/api/v1/cars")
+    Call<ListReponse<Car>> listCars();
 }
