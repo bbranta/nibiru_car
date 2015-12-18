@@ -16,4 +16,8 @@ public class MainActivity extends AppCompatActivity {
     public void onNewCarClick(View view) {
         startActivity(new Intent(this, NewCarActivity.class));
     }
+
+    public void onRentCarClick(View view) {
+        startActivity(new Intent(this, ListCarsActivity.class));
+    }
 }

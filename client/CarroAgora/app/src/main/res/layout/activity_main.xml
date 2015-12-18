@@ -10,11 +10,20 @@
     tools:context="com.motorola.carroagora.MainActivity">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Disponibilizar carro para aluguel"
         android:id="@+id/buttonNewCar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="onNewCarClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alugar carros"
+        android:id="@+id/buttonRentCar"
+        android:layout_below="@id/buttonNewCar"
+        android:layout_centerHorizontal="true"
+        android:onClick="onRentCarClick" />
 </RelativeLayout>
