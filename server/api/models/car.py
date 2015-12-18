@@ -17,7 +17,7 @@ class Car(ndb.Model):
     brand = ndb.StringProperty()
     year = ndb.IntegerProperty()
     optionals = ndb.IntegerProperty()
-    price = ndb.IntegerProperty()
+    price = ndb.FloatProperty()
     fuel = ndb.StringProperty()
     available_date = ndb.StringProperty()
     available_start_time = ndb.IntegerProperty()

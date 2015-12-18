@@ -14,11 +14,17 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class ListCarsActivity extends AppCompatActivity {
     @Override
@@ -26,8 +32,45 @@ public class ListCarsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_cars);
 
-        ListView listView = (ListView) findViewById(R.id.listCars);
 
+        CarService carService = CarServiceFactory.getCarService();
+        Call<ListReponse<Car>> call = carService.listCars();
+
+        call.enqueue(new Callback<ListReponse<Car>>() {
+            @Override
+            public void onResponse(Response<ListReponse<Car>> response, Retrofit retrofit) {
+                ListReponse<Car> carListReponse = response.body();
+
+                final CarAdapter adapter = new CarAdapter(carListReponse.getItems());
+
+                ListView listView = (ListView) findViewById(R.id.listCars);
+                listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String phoneNumber = adapter.getItem(position).getOwner().getPhone();
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + phoneNumber));
+                        startActivity(intent);
+                    }
+                });
+
+
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Deu ruim: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+/*
         List<Car> cars = new ArrayList<Car>();
         Car c = new Car();
         c.setModel("Fiesta");
@@ -47,19 +90,7 @@ public class ListCarsActivity extends AppCompatActivity {
         c.setOwner(owner);
         cars.add(c);
         cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);
-
-        final CarAdapter adapter = new CarAdapter(cars);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String phoneNumber = adapter.getItem(position).getOwner().getPhone();
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
-                startActivity(intent);
-            }
-        });
+*/
     }
 
     class CarAdapter extends BaseAdapter {

@@ -58,7 +58,7 @@ def add_car():
         c.model = request.form.get('model')
         c.year = int(request.form.get('year'))
         c.optionals = int(request.form.get('optionals'))
-        c.price = int(request.form.get('price'))
+        c.price = float(request.form.get('price'))
         c.fuel = request.form.get('fuel')
         c.available_date = request.form.get('available_date')
         c.available_start_time = int(request.form.get('available_start_time'))

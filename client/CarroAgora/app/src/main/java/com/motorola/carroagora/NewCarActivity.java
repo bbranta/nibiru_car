@@ -123,7 +123,7 @@ public class NewCarActivity extends AppCompatActivity {
                         car.getModel(),
                         car.getYear(),
                         car.getOptionals(),
-                        Math.round(100 * car.getPrice()),
+                        car.getPrice(),
                         car.getFuel().toString(),
                         car.getAvailableDate(),
                         car.getStartTime(),

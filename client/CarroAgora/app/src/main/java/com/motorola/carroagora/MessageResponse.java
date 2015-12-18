@@ -7,7 +7,6 @@ public class MessageResponse {
     private String status;
     private String message;
 
-
     public void setStatus(String status) {
         this.status = status;
     }

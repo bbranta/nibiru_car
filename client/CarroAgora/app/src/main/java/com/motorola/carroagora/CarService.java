@@ -25,7 +25,7 @@ public interface CarService {
             @Field("model") String model,
             @Field("year") int year,
             @Field("optionals") int optionals,
-            @Field("price") int price,
+            @Field("price") float price,
             @Field("fuel") String fuel,
             @Field("available_date") String availableDate,
             @Field("available_start_time") int availableStartTime,
