@@ -49,10 +49,23 @@ public class ListCarsActivity extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String phoneNumber = adapter.getItem(position).getOwner().getPhone();
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:" + phoneNumber));
+                        Car car = adapter.getItem(position);
+                        Intent intent = new Intent(ListCarsActivity.this, CarDetailsActivity.class);
+                        intent.putExtra("brand", car.getBrand());
+                        intent.putExtra("model", car.getModel());
+                        intent.putExtra("year", car.getYear());
+                        intent.putExtra("plate", car.getPlate());
+                        intent.putExtra("optionals", car.getOptionals());
+                        intent.putExtra("fuel", car.getFuel().ordinal());
+                        intent.putExtra("price", car.getPrice());
+                        intent.putExtra("availableDate", car.getAvailableDate());
+                        intent.putExtra("startTime", car.getStartTime());
+                        intent.putExtra("endTime", car.getEndTime());
+                        intent.putExtra("ownerName", car.getOwner().getName());
+                        intent.putExtra("ownerPhone", car.getOwner().getPhone());
+
                         startActivity(intent);
+
                     }
                 });
 
@@ -68,29 +81,6 @@ public class ListCarsActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
-
-
-/*
-        List<Car> cars = new ArrayList<Car>();
-        Car c = new Car();
-        c.setModel("Fiesta");
-        c.setPrice(42);
-        Person owner = new Person();
-        owner.setName("Joao Andante");
-        owner.setPhone("9999-8888");
-        c.setOwner(owner);
-        cars.add(c);
-
-        c = new Car();
-        c.setModel("K");
-        c.setPrice(21);
-        owner = new Person();
-        owner.setName("Velho Barreiro");
-        owner.setPhone("1111-2222");
-        c.setOwner(owner);
-        cars.add(c);
-        cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);cars.add(c);
-*/
     }
 
     class CarAdapter extends BaseAdapter {
