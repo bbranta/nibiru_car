@@ -1,5 +1,7 @@
 package com.motorola.carroagora;
 
+import android.text.TextUtils;
+
 import java.util.Date;
 
 public class Car {
@@ -13,7 +15,7 @@ public class Car {
 
     private Person owner;
 
-    private Date availableDate;
+    private String availableDate;
     private int startTime;
     private int endTime;
 
@@ -27,6 +29,19 @@ public class Car {
         FLEX,
     }
 
+    public static int stringToInt(String value) {
+        if (TextUtils.isEmpty(value)) {
+            return 0;
+        }
+        return Integer.valueOf(value);
+    }
+
+    public static float stringToFloat(String value) {
+        if (TextUtils.isEmpty(value)) {
+            return 0;
+        }
+        return Float.valueOf(value);
+    }
     public int getEndTime() {
         return endTime;
     }
@@ -99,11 +114,11 @@ public class Car {
         this.owner = owner;
     }
 
-    public Date getAvailableDate() {
+    public String getAvailableDate() {
         return availableDate;
     }
 
-    public void setAvailableDate(Date availableDate) {
+    public void setAvailableDate(String availableDate) {
         this.availableDate = availableDate;
     }
 
@@ -114,4 +129,5 @@ public class Car {
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
+
 }

@@ -9,10 +9,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -66,8 +62,8 @@ public class NewCarActivity extends AppCompatActivity {
 
                 car.setModel(editModel.getText().toString());
                 car.setBrand(editBrand.getText().toString());
-                car.setYear(Integer.parseInt(editYear.getText().toString()));
-                car.setPrice(Float.parseFloat(editPrice.getText().toString()));
+                car.setYear(Car.stringToInt(editYear.getText().toString()));
+                car.setPrice(Car.stringToFloat(editPrice.getText().toString()));
                 car.setPlate(editPlate.getText().toString());
                 switch (radioGroupFuel.getCheckedRadioButtonId()) {
                     case R.id.radioGasoline:
@@ -102,19 +98,37 @@ public class NewCarActivity extends AppCompatActivity {
 
                 car.setOwner(owner);
 
+                /*
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 try {
                     car.setAvailableDate(dateFormat.parse(editAvailableDate.getText().toString()));
                 } catch (ParseException ex) {
                     Log.w(TAG, "invalid date: " + ex.getMessage());
                 }
-                car.setStartTime(Integer.parseInt(editStartTime.getText().toString()));
-                car.setEndTime(Integer.parseInt(editEndTime.getText().toString()));
+                */
+                car.setAvailableDate(editAvailableDate.getText().toString());
+                car.setStartTime(Car.stringToInt(editStartTime.getText().toString()));
+                car.setEndTime(Car.stringToInt(editEndTime.getText().toString()));
 
-                Call<Void> call = CarServiceFactory.getCarService().newCar(car);
-                call.enqueue(new Callback<Void>() {
+                // Call api
+                CarService carService = CarServiceFactory.getCarService();
+                Call<MessageResponse> call = carService.saveCar(
+                        car.getOwner().getCpf(),
+                        car.getOwner().getName(),
+                        car.getOwner().getPhone(),
+                        car.getOwner().getCnh(),
+                        car.getPlate(),
+                        car.getBrand(),
+                        car.getModel(),
+                        car.getYear(),
+                        car.getOptionals(),
+                        Math.round(100 * car.getPrice()),
+                        car.getFuel().toString(),
+                        car.getAvailableDate() + "-" + car.getStartTime() + "-" + car.getEndTime()
+                );
+                call.enqueue(new Callback<MessageResponse>() {
                     @Override
-                    public void onResponse(Response<Void> response, Retrofit retrofit) {
+                    public void onResponse(Response<MessageResponse> response, Retrofit retrofit) {
                         Log.d(TAG, "aew");
                     }
 

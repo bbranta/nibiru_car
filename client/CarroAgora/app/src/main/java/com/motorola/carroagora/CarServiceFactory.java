@@ -1,5 +1,6 @@
 package com.motorola.carroagora;
 
+import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 /**
@@ -7,17 +8,18 @@ import retrofit.Retrofit;
  */
 public class CarServiceFactory {
 
-    private static CarInterface service;
+    private static CarService service;
 
-    public static synchronized CarInterface getCarService() {
+    public static synchronized CarService getCarService() {
 
         if (service == null) {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://nibiru-car.appspot.com")
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            service = retrofit.create(CarInterface.class);
+            service = retrofit.create(CarService.class);
         }
 
         return service;
